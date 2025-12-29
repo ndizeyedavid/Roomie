@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Image, ScrollView, StyleSheet, View } from "react-native";
 import { Button, Checkbox, Text, TextInput } from "react-native-paper";
 
-export default function LoginRoute() {
+export default function RegisterRoute() {
   const [checked, setChecked] = useState(false);
 
   return (
@@ -24,12 +24,12 @@ export default function LoginRoute() {
         }}
       >
         {/* Text headers */}
-        <View style={{ gap: 8, marginTop: 72 }}>
+        <View style={{ gap: 8, marginTop: 32 }}>
           <Text
             variant="headlineSmall"
             style={{ color: "#1F2A37", fontWeight: 700 }}
           >
-            Welcome Back !
+            Register Account
           </Text>
           <Text style={{ color: "#9DA4AE", fontWeight: 400 }}>
             Sign in with your email and password or social media to continue
@@ -37,6 +37,15 @@ export default function LoginRoute() {
         </View>
 
         <View style={{ width: "100%", gap: 16 }}>
+          <TextInput
+            mode="outlined"
+            label="Username"
+            activeOutlineColor="#6941C6"
+            textColor="#1F2A37"
+            style={{ backgroundColor: "white" }}
+            left={<TextInput.Icon icon="account" />}
+          />
+
           <TextInput
             mode="outlined"
             label="Email"
@@ -57,28 +66,31 @@ export default function LoginRoute() {
             style={{ backgroundColor: "white" }}
             left={<TextInput.Icon icon="lock" />}
           />
+          <TextInput
+            mode="outlined"
+            label="Confirm Password"
+            activeOutlineColor="#6941C6"
+            textContentType="password"
+            secureTextEntry={true}
+            textColor="#1F2A37"
+            style={{ backgroundColor: "white" }}
+            left={<TextInput.Icon icon="lock" />}
+          />
 
           {/* Checkbox */}
           <View>
             <Checkbox.Item
-              label="Remember me!"
+              label="Agree with terms and privacy"
               labelStyle={{ color: "#1F2A37" }}
               color="#6941c6"
               status={checked ? "checked" : "unchecked"}
               position="leading"
               mode="android"
-              style={{ width: "54%" }}
+              style={{ width: "87%" }}
               onPress={() => {
                 setChecked(!checked);
               }}
             />
-
-            <Link
-              href=""
-              style={{ textAlign: "right", position: "relative", top: -35 }}
-            >
-              Forgot Password?
-            </Link>
           </View>
 
           <Button
@@ -87,7 +99,7 @@ export default function LoginRoute() {
             rippleColor="rgba(0, 0, 0, 0.2)"
             style={styles.nextButton}
           >
-            Sign in
+            Sign Up
           </Button>
         </View>
 
@@ -107,12 +119,12 @@ export default function LoginRoute() {
         </View>
 
         <Text variant="bodyMedium" style={{ color: "#1F2A37" }}>
-          Don't have an account?{" "}
+          Already have an account?{" "}
           <Link
-            href="/(auth)/register"
+            href="/(auth)/login"
             style={{ color: "#FE456A", fontWeight: 700 }}
           >
-            Sign up
+            Sign in
           </Link>
         </Text>
       </View>

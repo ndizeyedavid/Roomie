@@ -1,9 +1,11 @@
+import { useRouter } from "expo-router";
 import { useState } from "react";
 import { Image, StyleSheet, View } from "react-native";
 import { Button, Text } from "react-native-paper";
 
 export default function welcome() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const router = useRouter();
 
   const onBoardingScreenContent = [
     {
@@ -28,7 +30,8 @@ export default function welcome() {
   ];
 
   function nextSlide() {
-    if (currentSlide == onBoardingScreenContent.length - 1) return;
+    if (currentSlide == onBoardingScreenContent.length - 1)
+      return router.push("/(auth)/register");
 
     setCurrentSlide((prev) => prev + 1);
     console.log(currentSlide);
@@ -45,7 +48,12 @@ export default function welcome() {
         // width: "95%",
       }}
     >
-      <Button mode="outlined" textColor="#4D5761" style={styles.skipButton}>
+      <Button
+        onPress={() => router.push("/(auth)/register")}
+        mode="outlined"
+        textColor="#4D5761"
+        style={styles.skipButton}
+      >
         Skip
       </Button>
       <Image source={onBoardingScreenContent[currentSlide].imageSource} />
