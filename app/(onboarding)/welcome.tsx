@@ -1,7 +1,39 @@
+import { useState } from "react";
 import { Image, StyleSheet, View } from "react-native";
 import { Button, Text } from "react-native-paper";
 
 export default function welcome() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const onBoardingScreenContent = [
+    {
+      imageSource: require("@/assets/images/onboarding-1.png"),
+      title: "Find the",
+      boldPart: "perfect roommate match",
+      description: "connect with trusted roommates who fit your lifestyle",
+    },
+    {
+      imageSource: require("@/assets/images/onboarding-2.png"),
+      title: "Find the perfect match in just",
+      boldPart: "one click",
+      description: "save time and connect with verified roommates near you",
+    },
+    {
+      imageSource: require("@/assets/images/onboarding-3.png"),
+      title: "Discover with us",
+      boldPart: "the perfect home",
+      description:
+        "browse safe, verified spaces and choose what feels like home",
+    },
+  ];
+
+  function nextSlide() {
+    if (currentSlide == onBoardingScreenContent.length - 1) return;
+
+    setCurrentSlide((prev) => prev + 1);
+    console.log(currentSlide);
+  }
+
   return (
     <View
       style={{
@@ -16,17 +48,17 @@ export default function welcome() {
       <Button mode="outlined" textColor="#4D5761" style={styles.skipButton}>
         Skip
       </Button>
-      <Image source={require("@/assets/images/onboarding-1.png")} />
+      <Image source={onBoardingScreenContent[currentSlide].imageSource} />
 
       {/* Text Group */}
       <View style={{ marginTop: 30, gap: 12, alignItems: "center" }}>
         <Text
           variant="headlineLarge"
-          style={{ textAlign: "center", color: "#1F2A37", width: 260 }}
+          style={{ textAlign: "center", color: "#1F2A37", width: 320 }}
         >
-          Find the{" "}
+          {onBoardingScreenContent[currentSlide].title}{" "}
           <Text style={{ color: "#1F2A37", fontWeight: 600 }}>
-            perfect roommate match
+            {onBoardingScreenContent[currentSlide].boldPart}
           </Text>
         </Text>
 
@@ -34,7 +66,7 @@ export default function welcome() {
           variant="bodyMedium"
           style={{ textAlign: "center", color: "#9DA4AE", width: 310 }}
         >
-          connect with trusted roommates who fit your lifestyle
+          {onBoardingScreenContent[currentSlide].description}
         </Text>
       </View>
 
@@ -42,17 +74,29 @@ export default function welcome() {
       <View
         style={{ flexDirection: "row", gap: 8, position: "relative", top: 5 }}
       >
-        <View
+        {/* <View
           style={[styles.progressIndicator, styles.progressIndicatorActive]}
-        />
-        {[2, 3].map((val) => (
-          <View key={val} style={[styles.progressIndicator]} />
-        ))}
+        /> */}
+        {[1, 2, 3].map((val) =>
+          currentSlide == val - 1 ? (
+            <View
+              key={val}
+              style={[styles.progressIndicator, styles.progressIndicatorActive]}
+            />
+          ) : (
+            <View key={val} style={[styles.progressIndicator]} />
+          )
+        )}
       </View>
 
       {/* Next Button */}
-      <Button mode="contained" textColor="#FFFFFF" style={styles.nextButton}>
-        Next
+      <Button
+        onPress={nextSlide}
+        mode="contained"
+        textColor="#FFFFFF"
+        style={styles.nextButton}
+      >
+        {currentSlide == 2 ? "Get Started" : "Next"}
       </Button>
     </View>
   );
