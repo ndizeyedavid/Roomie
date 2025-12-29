@@ -1,11 +1,12 @@
 import { Stack } from "expo-router";
 import { StatusBar } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { PaperProvider } from "react-native-paper";
 
 export function RootNavigator() {
   return (
     <>
-      <SafeAreaView style={{ flex: 1, backgroundColor: "#fcfcfd" }}>
+      {/* <SafeAreaView style={{ flex: 1, backgroundColor: "#fcfcfd" }}> */}
+      <PaperProvider>
         <Stack
           initialRouteName="(tabs)"
           screenOptions={{
@@ -15,7 +16,8 @@ export function RootNavigator() {
           <Stack.Screen name="(tabs)" />
           <Stack.Screen name="(auth)" />
         </Stack>
-      </SafeAreaView>
+      </PaperProvider>
+      {/* </SafeAreaView> */}
       <StatusBar barStyle={"dark-content"} />
     </>
   );
