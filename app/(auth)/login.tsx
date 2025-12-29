@@ -74,8 +74,14 @@ export default function LoginRoute() {
             />
 
             <Link
-              href=""
-              style={{ textAlign: "right", position: "relative", top: -35 }}
+              href="/(auth)/reset-password"
+              style={{
+                textAlign: "right",
+                position: "relative",
+                top: -35,
+                fontWeight: 600,
+                color: "#FE456A",
+              }}
             >
               Forgot Password?
             </Link>
