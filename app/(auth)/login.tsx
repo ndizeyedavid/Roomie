@@ -1,10 +1,15 @@
-import { Link } from "expo-router";
+import { Link, useRouter } from "expo-router";
 import { useState } from "react";
 import { Image, ScrollView, StyleSheet, View } from "react-native";
 import { Button, Checkbox, Text, TextInput } from "react-native-paper";
 
 export default function LoginRoute() {
   const [checked, setChecked] = useState(false);
+  const router = useRouter();
+
+  function handleSignIn() {
+    router.push("/(auth)/onboarding");
+  }
 
   return (
     <ScrollView
@@ -92,6 +97,7 @@ export default function LoginRoute() {
             textColor="#FFFFFF"
             rippleColor="rgba(0, 0, 0, 0.2)"
             style={styles.nextButton}
+            onPress={handleSignIn}
           >
             Sign in
           </Button>
